@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time Graph Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Initialize the chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Real-time Data',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Function to update the chart with new data
+        function updateChart(data) {
+            myChart.data.labels.push('');
+            myChart.data.datasets[0].data.push(data);
+            myChart.update();
+        }
+
+        // Function to fetch data from the server
+        function fetchData() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    updateChart(data.data);
+                    setTimeout(fetchData, 1000); // Fetch data every 1 second
+                });
+        }
+
+        // Start fetching data
+        fetchData();
+    </script>
+</body>
+</html>
