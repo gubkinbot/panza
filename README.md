@@ -4,5 +4,4 @@
 
 Вased on YOLOv6x and gpt-3.5-turbo-16k.
 
-https://panza.uz/
-
+https://panza.uz/, https://t.me/panzauzbot
