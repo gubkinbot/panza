@@ -11,7 +11,7 @@ def handle_start(message):
 
 @bot.message_handler(commands=['coffee'])
 def handle_start(message):
-    bot.send_message(message.chat.id, 'Модуль анализа загрузки буфета. Баллы пробок, как в Яндекс.Картах.')
+    bot.send_message(message.chat.id, '!!! Модуль анализа загрузки буфета. Баллы пробок, как в Яндекс.Картах.')
 
 @bot.message_handler(commands=['learn'])
 def handle_start(message):
@@ -19,7 +19,7 @@ def handle_start(message):
 
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
-    response = openai.ChatCompletion.create(model='gpt-3.5-turbo-16k-0613', messages=[{'role': 'system', 'content': 'Ты помощник ЛУОК'}, {'role': "user", "content": str(message.text)}])
+    response = openai.ChatCompletion.create(model='gpt-4-0613', messages=[{'role': 'system', 'content': 'Ты помощник ЛУОК'}, {'role': "user", "content": str(message.text)}])
     bot.send_message(message.chat.id, response['choices'][0]['message']['content'])
 
 bot.polling()
